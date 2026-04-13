@@ -1,36 +1,63 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# OptionsIQ — Black-Scholes Options Analyser
 
-## Getting Started
+Professional options pricing and greeks calculator with real-time payoff diagrams, multi-leg builder, and breakeven analysis.
 
-First, run the development server:
+## Features
+
+- **Black-Scholes engine** — theoretical price, Delta, Gamma, Theta, Vega, Rho
+- **Payoff diagram** — Expiry, T+0, and T½ curves with breakeven markers
+- **Multi-leg builder** — combine legs into spreads, straddles, condors etc.
+- **Breakeven table** — max profit, max loss, breakeven levels
+
+## Stack
+
+- Next.js 14 (App Router)
+- TypeScript
+- Tailwind CSS
+- Recharts
+- Clerk (auth — coming soon)
+- Stripe (payments — coming soon)
+- Supabase (database — coming soon)
+
+## Getting started
 
 ```bash
+# Install dependencies
+npm install
+
+# Copy env file
+cp .env.example .env.local
+# Fill in your keys in .env.local
+
+# Run dev server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Project structure
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+src/
+  app/              # Next.js App Router pages
+  components/       # React components
+    OptionsAnalyser.tsx   # Main UI wrapper
+    PayoffChart.tsx       # Recharts payoff diagram
+    GreeksTable.tsx       # Greeks metric cards
+    MultiLegBuilder.tsx   # Multi-leg strategy builder
+  lib/
+    blackScholes.ts       # BS engine + greeks (pure TS, no deps)
+```
 
-## Learn More
+## Deployment
 
-To learn more about Next.js, take a look at the following resources:
+Push to `main` → Vercel auto-deploys. GitHub Actions runs lint + type check + build on every push.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Roadmap
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- [ ] Stripe payments + freemium gating
+- [ ] Clerk auth + saved strategies
+- [ ] Live underlying price fetch (Yahoo Finance)
+- [ ] IV surface visualisation
+- [ ] GEX strip (moomoo API)
+- [ ] Moomoo live option chain integration
